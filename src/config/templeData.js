@@ -14,7 +14,7 @@ export const templeData = {
   
   location: {
     village: "Devaragudipalle",
-    mandal: "Penumuru",
+    mandal: "Vedurukuppam",
     district: "Chittoor",
     state: "Andhra Pradesh",
     pincode: "517167",
