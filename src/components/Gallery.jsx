@@ -24,10 +24,6 @@ export default function Gallery() {
   const [activeIndex, setActiveIndex] = useState(null);
   const [showAll, setShowAll] = useState(false);
 
-  // Community-uploaded media (stored in browser memory only – no backend)
-  const [communityMedia, setCommunityMedia] = useState([]);
-  const [dragOver, setDragOver] = useState(false);
-
   const visibleImages = showAll ? baseImages : baseImages.slice(0, 4);
 
   function openLightbox(img, index) {
@@ -52,31 +48,6 @@ export default function Gallery() {
     const newIdx = (activeIndex + 1) % all.length;
     setActiveImage(all[newIdx]);
     setActiveIndex(newIdx);
-  }
-
-  function handleFiles(files) {
-    const newMedia = [];
-    Array.from(files).forEach(file => {
-      if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
-        const url = URL.createObjectURL(file);
-        newMedia.push({ url, type: file.type.startsWith('video/') ? 'video' : 'image', name: file.name });
-      }
-    });
-    setCommunityMedia(prev => [...prev, ...newMedia]);
-  }
-
-  function handleDrop(e) {
-    e.preventDefault();
-    setDragOver(false);
-    handleFiles(e.dataTransfer.files);
-  }
-
-  function handleInputChange(e) {
-    handleFiles(e.target.files);
-  }
-
-  function removeMedia(idx) {
-    setCommunityMedia(prev => prev.filter((_, i) => i !== idx));
   }
 
   return (
@@ -110,106 +81,6 @@ export default function Gallery() {
               {showAll ? 'Show Less' : `View All ${baseImages.length} Photos`}
             </button>
           </div>
-        </div>
-      </section>
-
-      {/* ── COMMUNITY UPLOAD SECTION ── */}
-      <section id="community-upload" className="alt-bg">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-tag">Share Your Blessings</span>
-            <h2>Upload Your Moments</h2>
-            <p style={{ color: 'var(--text-muted)', marginTop: '10px', fontSize: '1rem' }}>
-              Visited the temple? Share your photos &amp; videos with the devotee community.
-            </p>
-          </div>
-
-          {/* Drop Zone */}
-          <div
-            className={`upload-dropzone ${dragOver ? 'drag-active' : ''}`}
-            onDragOver={e => { e.preventDefault(); setDragOver(true); }}
-            onDragLeave={() => setDragOver(false)}
-            onDrop={handleDrop}
-            onClick={() => document.getElementById('community-file-input').click()}
-          >
-            <div className="upload-dropzone-icon">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19.35 10.04A7.49 7.49 0 0012 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 000 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/>
-              </svg>
-            </div>
-            <p className="upload-dropzone-text">
-              <strong>Drag &amp; drop</strong> your photos or videos here
-            </p>
-            <p className="upload-dropzone-subtext">or click to browse files</p>
-            <div className="upload-dropzone-types">
-              <span>📷 JPG, PNG, WEBP</span>
-              <span>🎬 MP4, MOV, AVI</span>
-            </div>
-            <input
-              id="community-file-input"
-              type="file"
-              multiple
-              accept="image/*,video/*"
-              style={{ display: 'none' }}
-              onChange={handleInputChange}
-            />
-          </div>
-
-          {/* Uploaded Media Preview Grid */}
-          {communityMedia.length > 0 && (
-            <div className="community-media-section">
-              <h3 className="community-media-heading">
-                Your Uploaded Media ({communityMedia.length})
-              </h3>
-              <div className="community-media-grid">
-                {communityMedia.map((media, idx) => (
-                  <div key={idx} className="community-media-item">
-                    {media.type === 'image' ? (
-                      <img src={media.url} alt={media.name} className="community-media-preview" />
-                    ) : (
-                      <video
-                        src={media.url}
-                        className="community-media-preview"
-                        controls
-                        muted
-                      />
-                    )}
-                    <div className="community-media-overlay">
-                      <span className="community-media-type-badge">
-                        {media.type === 'video' ? '🎬 Video' : '📷 Photo'}
-                      </span>
-                      <button
-                        className="community-media-remove"
-                        onClick={() => removeMedia(idx)}
-                        title="Remove"
-                      >
-                        ✕
-                      </button>
-                    </div>
-                    <p className="community-media-name">{media.name}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div style={{ textAlign: 'center', marginTop: '24px' }}>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-                  🙏 Thank you for sharing! To permanently submit your photos for review, please send them via WhatsApp.
-                </p>
-                <a
-                  href="https://wa.me/919441551500"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-maroon"
-                  style={{ marginTop: '12px' }}
-                >
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style={{ marginRight: 6 }}>
-                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.25 8.477 3.522 2.266 2.27 3.513 5.284 3.513 8.486 0 6.66-5.337 11.999-11.948 11.999-2.005-.001-3.973-.504-5.714-1.463L0 24zm6.59-2.072c1.66.984 3.248 1.498 4.749 1.499 5.529 0 10.029-4.5 10.029-10.03 0-2.677-1.042-5.193-2.936-7.09-1.894-1.897-4.412-2.943-7.092-2.943-5.53 0-10.03 4.5-10.03 10.03 0 1.702.483 3.36 1.396 4.814l-.994 3.633 3.72-.976z"/>
-                  </svg>
-                  Send via WhatsApp
-                </a>
-              </div>
-            </div>
-          )}
         </div>
       </section>
 

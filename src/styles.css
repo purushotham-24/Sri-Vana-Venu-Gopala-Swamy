@@ -1473,3 +1473,25 @@ section.alt-bg .section-header h2::before {
     padding: 24px;
   }
 }
+/* ==========================================================================
+   MOBILE HERO BACKGROUND
+   Keep the cow/deity face clearly visible on mobile
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .hero-background {
+    object-fit: cover;
+    object-position: 18% center;
+  }
+
+  .hero {
+    min-height: 70vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-background {
+    object-fit: cover;
+    object-position: 18% center;
+  }
+}
