@@ -276,8 +276,11 @@ section.alt-bg .section-header h2::before {
 .navbar-logo-icon {
   width: 44px;
   height: 44px;
-  fill: var(--gold-primary);
+  object-fit: contain;
+  border-radius: 6px;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  display: block;
+  flex-shrink: 0;
 }
 
 .navbar-title-block {
