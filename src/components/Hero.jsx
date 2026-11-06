@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { templeData } from '../config/templeData';
 import heroImg from '../assets/temple-hero.jpg';
@@ -18,6 +19,15 @@ export default function Hero() {
       {/* Hero Content */}
       <div className="container">
         <div className="hero-container">
+
+          {/* Lord Krishna Logo Box */}
+          <div className="hero-logo-box">
+            <img
+              src="/krishna_logo.png.png"
+              alt="Lord Krishna"
+            />
+          </div>
+
           <span className="hero-welcome">Welcome to</span>
 
           <h1 className="hero-title">
@@ -48,7 +58,7 @@ export default function Hero() {
                 fill="currentColor"
                 style={{ marginRight: '4px' }}
               >
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5-2.5-2.5 2.5-1.12 2.5-2.5z" />
               </svg>
               Get Directions
             </a>
