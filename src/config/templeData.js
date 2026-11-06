@@ -9,7 +9,7 @@ export const templeData = {
   contact: {
     phone: "+91 9441555150", // Placeholder for phone
     whatsapp: "+91 9441555150", // Placeholder for WhatsApp
-    email: "purushothamchowdhary146@gmil.com",
+    email: "srivanavenugopalaswamy@gmail.com",
   },
   
   location: {
