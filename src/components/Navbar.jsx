@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { templeData } from '../config/templeData';
 
@@ -13,6 +14,7 @@ export default function Navbar() {
         setIsScrolled(false);
       }
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -30,21 +32,31 @@ export default function Navbar() {
 
   return (
     <header style={{ position: 'sticky', top: 0, zIndex: 1000, width: '100%' }}>
+
       {/* TTD Style Announcements Ticker Bar */}
       <div className="ticker-bar">
         <div className="ticker-content">
-          <span>✦ Special Announcement: Sri Vana Venu Gopala Swamy Temple is open on <strong>Saturdays only from 9:00 AM to 3:00 PM</strong>. Every Saturday, Pala Abhishekam (Milk offering) and Annadanam (Free meals) are provided for all visitors. ✦</span>
-          <span>✦ Special Announcement: Sri Vana Venu Gopala Swamy Temple is open on <strong>Saturdays only from 9:00 AM to 3:00 PM</strong>. Every Saturday, Pala Abhishekam (Milk offering) and Annadanam (Free meals) are provided for all visitors. ✦</span>
+          <span>
+            ✦ Special Announcement: Sri Vana Venu Gopala Swamy Temple is open on <strong>Saturdays only from 9:00 AM to 3:00 PM</strong>. Every Saturday, Pala Abhishekam (Milk offering) and Annadanam (Free meals) are provided for all visitors. ✦
+          </span>
+          <span>
+            ✦ Special Announcement: Sri Vana Venu Gopala Swamy Temple is open on <strong>Saturdays only from 9:00 AM to 3:00 PM</strong>. Every Saturday, Pala Abhishekam (Milk offering) and Annadanam (Free meals) are provided for all visitors. ✦
+          </span>
         </div>
       </div>
-      
+
       <nav className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`}>
         <div className="navbar-container">
+
           <a href="#home" className="navbar-logo-area">
-            {/* Detailed Golden Temple Silhouette Icon */}
-            <svg className="navbar-logo-icon" viewBox="0 0 24 24">
-              <path d="M12 2L2 10h3v10h14V10h3L12 2zm0 3.8l6.2 5H17v8H7v-8h-1.2l6.2-5zm-3 7.2v3h6v-3H9z" />
-            </svg>
+
+            {/* Lord Krishna Logo */}
+            <img
+              src="/krishna_logo.png.png"
+              alt="Lord Krishna"
+              className="navbar-logo-icon"
+            />
+
             <div className="navbar-title-block">
               <span className="navbar-title">{templeData.name}</span>
               <span className="navbar-subtitle">{templeData.subtitle}</span>
@@ -63,8 +75,8 @@ export default function Navbar() {
           </ul>
 
           {/* Hamburger Toggle */}
-          <button 
-            className="navbar-toggle" 
+          <button
+            className="navbar-toggle"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle navigation menu"
           >
@@ -81,7 +93,10 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Drawer */}
-        <div className={`mobile-nav ${isOpen ? 'open' : ''}`} style={{ top: 'calc(var(--header-height) + 30px)' }}>
+        <div
+          className={`mobile-nav ${isOpen ? 'open' : ''}`}
+          style={{ top: 'calc(var(--header-height) + 30px)' }}
+        >
           {navItems.map((item, index) => (
             <a
               key={index}
