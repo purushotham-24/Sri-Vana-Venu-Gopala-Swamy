@@ -52,7 +52,7 @@ export default function Navbar() {
 
             {/* Lord Krishna Logo */}
             <img
-              src="/krishna_logo.png.png"
+              src="/Krishna_logo.png.png"
               alt="Lord Krishna"
               className="navbar-logo-icon"
             />
